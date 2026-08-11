@@ -11,4 +11,4 @@ Issue link rule (do not remove this comment):
 | # | Title | Status |
 |---|-------|--------|
 | 1 | [Weekly Tuist News #1](https://toyboy2.medium.com/weekly-tuist-news-1-da9f701453e5) | Published on Medium |
-| 2 | Weekly Tuist News #2 — [한국어](issues/2.ko.html) / [English](issues/2.en.html) | Draft — pending review |
+| 2 | [Weekly Tuist News #2](https://toyboy2.medium.com/weekly-tuist-news-2-9a197665dc32) | Published on Medium |

@@ -1,6 +1,12 @@
-# Weekly Tuist News #2 (Draft — pending review)
+# Weekly Tuist News #2
 
-Not much changed since last issue, so this one also covers 4.203.0.
+Published: Medium, by Lee young-jun (toyboy2) — https://toyboy2.medium.com/weekly-tuist-news-2-9a197665dc32
+
+> Note: this is a local archive fetched from the published Medium article. Inline screenshots ("Press enter or click to view image in full size") are not included — text only.
+
+---
+
+Not much changed since last letter, so this one also covers 4.203.0.
 
 **1. New option to export run results**
 
@@ -25,21 +31,15 @@ Source: [Get a run's dashboard URLs as JSON, on any CI provider](https://tuist.d
 
 **2. New network retry policy option**
 
-As of [4.203.0](https://github.com/tuist/tuist/releases/tag/4.203.0), you can configure network retries up to 10 times.
-Retries used to be fixed at 3 (a longer timeout could turn one stalled transfer into up to four long waits) — now you can set the count via the `TUIST_HTTP_MAXIMUM_RETRY_COUNT` environment variable, and set the base delay up to 30000ms via `TUIST_HTTP_RETRY_BASE_DELAY_IN_MILLISECONDS`.
-
-For reference, a bug that made the default delay run at roughly 1ms instead of the intended 100ms was also fixed here. Each retry doubles the delay and adds random jitter, helping clients avoid retrying in lockstep after a network failure.
+As of [4.203.0](https://github.com/tuist/tuist/releases/tag/4.203.0), you can configure network retries up to 10 times. Retries used to be fixed at 3 — now you can set the count via the `TUIST_HTTP_MAXIMUM_RETRY_COUNT` environment variable, and set the base delay up to 30000ms via `TUIST_HTTP_RETRY_BASE_DELAY_IN_MILLISECONDS`.
 
 Source: [Tune network retries for slow or congested connections](https://tuist.dev/changelog/2026.07.21-configurable-network-retries)
 
 **3. Quarantine/Flaky test sorting gets a "marked-at" option**
 
-As of [August 4](https://tuist.dev/changelog/2026.08.04-sort-quarantined-flaky-tests-by-marked-time), the dashboard added new sort options for quarantined and flaky tests.
-The quarantined tests list now has "Quarantined at", and the flaky tests list has "Marked flaky at" — making it easier to find the tests that have sat the longest, or check what was quarantined most recently.
+As of August 4, the dashboard added new sort options for quarantined and flaky tests. The quarantined tests list now has "Quarantined at", and the flaky tests list has "Marked flaky at" — making it easier to find the tests that have sat the longest, or check what was quarantined most recently.
 
 (A dashboard feature, unrelated to any CLI version.)
-
----
 
 ### Tuist Talk
 
@@ -47,15 +47,11 @@ The quarantined tests list now has "Quarantined at", and the flaky tests list ha
 
 The Tuist team posted in the Slack community saying they're working on a website rebrand and looking for user testimonials — faster builds, a better developer experience, easier project maintenance, or anything else that made a difference, even a couple of sentences would help. If interested, you can reply in the thread or send a DM.
 
-(Slack screenshot)
-
 For context, Tuist's Pedro was invited into an open KakaoTalk group where Korean iOS developers share Tuist know-how, and posted a similar testimonial request there last year — the testimonial I left back then is still featured on Tuist's official homepage today.
-
-(screenshot of my testimonial)
 
 ### Hands-on notes
 
-#### `--run-report-path` ####
+#### `--run-report-path`
 
 Since it doesn't need any extra parameters, I started with the simplest case — adding `--run-report-path` to `tuist test`.
 
@@ -113,19 +109,20 @@ Running `tuist xcodebuild build` and opening the report:
 
 I confirmed only the build URL gets filled in.
 
-#### Quarantine/Flaky test sorting ####
+#### Quarantine/Flaky test sorting
 
 I opened the quarantined tests view on the dashboard and checked the sort options — "Quarantined At" was there.
 
-(screenshot of Quarantined At)
-
-I didn't have any test data to actually try sorting with, but even with the dashboard set to Korean, it still showed up untranslated.
-(If it were translated, it'd probably read something like "격리 시기" in Korean.)
+I didn't have any test data to actually try sorting with, but even with the dashboard set to Korean, it still showed up untranslated. (If it were translated, it'd probably read something like "격리 시기" in Korean.)
 
 Same story on the flaky tests side — I found "Marked flaky at".
 
-(screenshot of Marked flaky at)
-
 That one was also still untranslated. Translated, it'd probably be "불안정으로 표시된 시기" — though honestly both could just be "분류 시기" ("marked-at time") in Korean.
 
-### See the previous issue (#1 link)
+See [Weekly news letter #1](https://toyboy2.medium.com/weekly-tuist-news-1-da9f701453e5).
+
+Happy Coding! 😎
+
+If you found this post helpful, please give it a round of applause 👏. Explore more iOS, Tuist related content in my other posts.
+
+For additional insights and updates, check out my LinkedIn profile. Thank you for your support!
