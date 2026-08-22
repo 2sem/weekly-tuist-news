@@ -1,6 +1,8 @@
 # Weekly Tuist News #3
 
-> Note: 한국어 초안 승인됨. 아직 Medium에 발행되지 않았습니다.
+발행: Medium, Lee young-jun (toyboy2) — https://toyboy2.medium.com/weekly-tuist-news-3-412f8cc071d7
+
+> Note: 발행된 Medium 아티클(영어+한국어 통합본)에서 가져온 로컬 아카이브입니다. 인라인 스크린샷은 포함하지 않음 — 텍스트만.
 
 ---
 

@@ -1,6 +1,8 @@
 # Weekly Tuist News #3
 
-> Note: this is a draft. Translated from the approved Korean draft. Not yet published to Medium.
+Published: Medium, by Lee young-jun (toyboy2) — https://toyboy2.medium.com/weekly-tuist-news-3-412f8cc071d7
+
+> Note: this is a local archive fetched from the published Medium article (combined English + Korean piece). Inline screenshots are not included — text only.
 
 ---
 
