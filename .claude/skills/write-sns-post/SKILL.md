@@ -23,28 +23,33 @@ This writes the short social posts that announce an already-published issue — 
 
 ## Structure by platform
 
+The newsletter archive for readers is the Medium list: `https://toyboy2.medium.com/list/weekly-tuist-news-740a616cf8f3` (every published issue lands here — use this, not the GitHub Pages site, since Pages is a working/staging surface for drafts, not the reader-facing archive) — include it wherever there's room (LinkedIn/Facebook always; Threads/X only if it still fits the char budget after everything else). Frame it as a hook, not a bare label — e.g. "what the official changelog missed, past issues here" rather than a flat "Past issues:" — tying back to the same gap-between-changelog-and-reality angle the newsletter itself runs on. Keep the short-form (Threads/X) version to one punchy clause so it doesn't crowd out the issue's own link.
+
 **LinkedIn** (professional, full structure):
 1. Short opening line noting the issue was just published.
 2. 3 bullet points summarizing the issue's key items.
 3. One honest positioning line (see below).
-4. Medium link.
-5. A handful of hashtags (e.g. `#Tuist #iOS #Xcode #SwiftPM`).
+4. Medium link (this issue).
+5. Archive link, framed as a way to catch up on past issues.
+6. A handful of hashtags (e.g. `#Tuist #iOS #Xcode #SwiftPM`).
 
 **Facebook** (conversational, condensed):
 1. Short opening line.
 2. 1–2 sentence summary (prose, not bullets) covering the single most interesting item.
-3. Medium link.
-4. 1–2 hashtags at most.
+3. Medium link (this issue).
+4. Archive link, framed as a way to catch up on past issues.
+5. 1–2 hashtags at most.
 
 **Threads** (casual, tight, ≤500 chars):
 1. One-line hook.
 2. One sentence naming the top 1–2 items.
-3. Medium link.
-4. 0–2 hashtags only if they fit.
+3. Medium link (this issue).
+4. Archive link only if it still fits within 500 chars — drop it before dropping the issue's own link or hook.
+5. 0–2 hashtags only if they fit.
 
 **X** (tightest, ≤280 chars):
 1. One-line hook naming the single most interesting item.
-2. Medium link.
+2. Medium link (this issue) — this is the one link that must survive the budget; only add the archive link if there's slack left after it and the hashtag.
 3. At most 1 hashtag, only if it fits.
 
 **Honest positioning line** (LinkedIn/Facebook; skip on Threads/X for space): this is a personal project/newsletter, not an official Tuist role — never imply an "ambassador" title, and don't hide that Tuist isn't (yet) used in production at the author's day job, per the project's absolute honesty rule.
@@ -52,9 +57,9 @@ This writes the short social posts that announce an already-published issue — 
 ## Procedure
 
 1. Read the issue's approved `issues/weekly-tuist-news-N.ko.md` (and `.en.md` if it exists) to pull real content — don't work from memory of the conversation alone if the file has since changed.
-2. For each requested platform, draft the Korean version first (Korean is the primary language for this project). Save as `issues/weekly-tuist-news-N-{platform}.ko.md` (`{platform}` = `linkedin`, `facebook`, `threads`, or `x`).
+2. For each requested platform, draft the Korean version first (Korean is the primary language for this project). Save as `posts/weekly-tuist-news-N-{platform}.ko.md` (`{platform}` = `linkedin`, `facebook`, `threads`, or `x`) — create the `posts/` directory if it doesn't exist yet.
 3. For X and Threads, state the actual character count next to the draft so the user can see it's within budget.
-4. Ask whether English versions are wanted, unless already requested up front. If yes, translate each (don't re-draft with new framing) and save as `issues/weekly-tuist-news-N-{platform}.en.md` — re-check the char count for X/Threads after translating, since English length can differ from Korean.
+4. Ask whether English versions are wanted, unless already requested up front. If yes, translate each (don't re-draft with new framing) and save as `posts/weekly-tuist-news-N-{platform}.en.md` — re-check the char count for X/Threads after translating, since English length can differ from Korean.
 5. Show the drafted post(s) to the user. Don't commit automatically — wait for the user to approve or ask you to commit/push, same as any other repo change.
 
 ## Don't

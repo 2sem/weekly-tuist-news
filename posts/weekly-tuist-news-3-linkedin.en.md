@@ -10,4 +10,6 @@ I haven't used Tuist in production at my day job yet — this is a personal news
 
 Full post: https://toyboy2.medium.com/weekly-tuist-news-3-412f8cc071d7
 
+More stories the official changelog missed — past issues here: https://toyboy2.medium.com/list/weekly-tuist-news-740a616cf8f3
+
 #Tuist #iOS #Xcode #SwiftPM #BuildSystems #Newsletter
