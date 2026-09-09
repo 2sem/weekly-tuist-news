@@ -1,3 +1,11 @@
 theme: jekyll-theme-minimal
 title: Weekly Tuist News
 description: A newsletter roundup of the Tuist ecosystem — release notes, community highlights, and hands-on notes.
+
+# Rouge wraps fenced code blocks in <div class="highlighter-rouge"><div class="highlight"><pre>...
+# Medium's importer can't parse that nesting and silently drops the whole block on import
+# (inline `code` spans survive fine — they're plain <code>, no wrapper divs). Disabling the
+# syntax highlighter makes kramdown emit a bare <pre><code>...</code></pre> instead, which
+# Medium's importer does handle. See medium-draft-skill's known-issues note.
+kramdown:
+  syntax_highlighter: null
