@@ -13,3 +13,4 @@ Issue link rule (do not remove this comment):
 | 1 | [Weekly Tuist News #1](https://toyboy2.medium.com/weekly-tuist-news-1-da9f701453e5) | Published on Medium |
 | 2 | [Weekly Tuist News #2](https://toyboy2.medium.com/weekly-tuist-news-2-9a197665dc32) | Published on Medium |
 | 3 | [Weekly Tuist News #3](https://toyboy2.medium.com/weekly-tuist-news-3-412f8cc071d7) | Published on Medium |
+| 4 | Weekly Tuist News #4 — [한국어](issues/4.ko.html) / [English](issues/4.en.html) | Approved — awaiting Medium import |
