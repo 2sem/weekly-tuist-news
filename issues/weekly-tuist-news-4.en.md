@@ -22,20 +22,12 @@ Usage limits for the free (Air) plan now apply across live cache lanes. If you'd
 
 Source: [4.206.0 release notes](https://github.com/tuist/tuist/releases/tag/4.206.0)
 
-**3. Stress-test the tests your branch adds before merging**
+**3. Worth reading — "The physics of build systems"**
 
-This feature reruns only the newly added test cases in a PR several times before merge, to catch flaky tests early. Fast tests get up to 10 reruns, slower ones fewer, and the whole pass stops at 200 test cases or 10 minutes, whichever comes first. `report` mode just warns; `enforce` mode fails the run.
+A post Tuist CEO Pedro Piñera put on the official blog on Aug 25. It lays out how four things — build graphs, incremental builds, remote caching, and remote execution — decide whether a build *feels* fast. Worth a read if you're wrestling with build times, even if you're not on remote caching or execution yet.
 
-```
-tuist xcodebuild test --stress-new-tests report -scheme MyScheme
-```
-
-Or enable it via the `TUIST_TEST_STRESS_NEW_TESTS` environment variable.
-
-Source (PR): [Stress-test the tests your branch adds](https://github.com/tuist/tuist/pull/12809)
+Source: [The physics of build systems](https://tuist.dev/blog/2026/08/25/the-physics-of-build-systems)
 
 ### Tuist Talk
-
-The official blog published ["The physics of build systems"](https://tuist.dev/blog/2026/08/25/the-physics-of-build-systems). It covers why build graphs, incremental builds, remote caching, and remote execution decide whether a build feels fast.
 
 On [Slack](https://tuist-community.slack.com/archives/CCYNEGY1L/p1788506463708969), a user open-sourced their side project and asked whether it was okay to make its Tuist Dashboard public too. Pedro was delighted, and mentioned he's discussing a feature with Marek Fořt to let projects register a logo so the Open Graph image reflects it when a dashboard link is shared on social media.

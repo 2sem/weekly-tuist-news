@@ -22,21 +22,13 @@
 
 원문: [4.206.0 릴리즈 노트](https://github.com/tuist/tuist/releases/tag/4.206.0)
 
-**3. 새로 추가한 테스트를 병합 전에 스트레스 테스트**
+**3. 읽을거리 — "The physics of build systems"**
 
-PR에 새로 추가된 테스트 케이스만 골라 병합 전에 여러 번 반복 실행해서 불안정한 test를 미리 잡아내는 기능입니다. 빠른 테스트는 최대 10회, 느린 테스트는 그보다 적게 재실행하며, 전체 재실행은 200케이스 또는 10분 중 먼저 도달하는 조건에서 멈춥니다. `report` 모드는 경고만 남기고, `enforce` 모드는 실패 처리합니다.
+Tuist CEO Pedro Piñera가 8/25에 공식 블로그에 올린 글입니다. 빌드 그래프, incremental build, 원격 캐싱, 원격 실행 이 네 가지가 왜 "빌드가 빠르게 느껴지는가"를 결정하는지 정리한 내용입니다. 원격 캐시나 원격 실행을 아직 안 쓰더라도 빌드 시간을 고민 중이면 읽어볼 만합니다.
 
-```
-tuist xcodebuild test --stress-new-tests report -scheme MyScheme
-```
-
-또는 환경변수 `TUIST_TEST_STRESS_NEW_TESTS`로 켤 수 있습니다.
-
-원문(PR): [Stress-test the tests your branch adds](https://github.com/tuist/tuist/pull/12809)
+원문: [The physics of build systems](https://tuist.dev/blog/2026/08/25/the-physics-of-build-systems)
 
 ### Tuist Talk
-
-공식 블로그에 ["The physics of build systems"](https://tuist.dev/blog/2026/08/25/the-physics-of-build-systems)라는 글이 올라왔습니다. 빌드 그래프, incremental build, 원격 캐싱, 원격 실행이 왜 빌드 체감 속도를 좌우하는지를 다룬 글입니다.
 
 [Slack](https://tuist-community.slack.com/archives/CCYNEGY1L/p1788506463708969)에서는 한 사용자가 자신의 사이드 프로젝트를 오픈소스로 공개하면서 Tuist Dashboard도 함께 공개해도 되는지 물었습니다.
 Pedro는 감탄하며, 프로젝트마다 로고를 등록해두면 소셜에 링크를 공유할 때 Open Graph 이미지에 그 로고가 반영되게 하는 기능을 Marek Fořt과 논의 중이라고 답했습니다.

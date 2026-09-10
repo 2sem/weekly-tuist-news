@@ -30,6 +30,18 @@ gh api repos/tuist/tuist/releases --paginate \
    - **버전 분류: 하이픈이 없으면 stable, 있으면(`-rc`, `-canary` 등) pre-release.** 이 판별은 기계적으로 함 (예: `4.202.0` → stable, `4.202.0-rc.1` → pre-release). **주의: 이 stable/pre-release 분류는 CLI 버전 문자열 전용 기준.** `tuist.dev/changelog`의 서버·대시보드 기능 글은 CLI 버전 번호가 아예 없는 게 정상이며, "CLI에 shipped 됐는지"와는 무관하게 그 자체로 이미 공개(live) 상태 — 별도로 "CLI stable/pre-release"인지 헷갈리지 말 것
    - 공식 패치노트 permalink (체인지로그: `tuist.dev/changelog/...`, CLI: GitHub 릴리즈 노트 URL, 블로그: `tuist.dev/blog/...`)
 3. Pre-release 항목도 수집 대상에 포함 가능. 단, 초안 단계에서 "아직 pre-release 단계"임을 반드시 명시하도록 플래그를 남길 것
+
+   **3-1. "changelog 글이 올라옴" ≠ "사용자가 지금 stable에서 쓸 수 있음" — 반드시 별도로 검증.**
+   `tuist.dev/changelog` 글이 CLI 명령/플래그/manifest API를 소개하면, 그 기능이 실제로 어느 릴리즈에 들어갔는지 확인할 것:
+   ```bash
+   # 해당 기능의 PR 번호나 키워드로 릴리즈 노트 본문 검색
+   gh api repos/tuist/tuist/releases --paginate \
+     --jq '.[] | select((.body // "") | test("<PR번호 또는 키워드>"; "i")) | "\(.published_at)\t\(.tag_name)\tprerelease=\(.prerelease)"' | sort
+   ```
+   - 결과가 **canary/rc 태그뿐**이거나 **kura/server 등 서버 컴포넌트 태그뿐**이면: stable CLI 사용자는 아직 못 씀. "pre-release" 플래그 필수, 또는 후보에서 제외.
+   - 서버 사이드로 자동 적용되는 기능(예: 캐시 백엔드 개선)은 "어떤 stable CLI가 그 경로를 쓰는지"까지 확인해야 "지금 적용됨"이라 말할 수 있음.
+   - 실제 사고: `--stress-new-tests`(2026.09.03 changelog)를 stable 기능으로 4호에 넣었다가, 그 플래그가 `4.208.0-canary.17`에만 있어서 4.207.0 사용자한테 `xcodebuild: error: invalid option` 남. changelog 날짜만 보고 "바로 쓸 수 있음"으로 분류한 게 원인.
+   - CLI 명령/플래그가 있는 항목은 초안에 코드블록을 넣기 전에 **그 명령이 지목한 stable 릴리즈에서 실제로 동작하는 형태인지** 확인 (플래그 이름, 서브커맨드 위치 포함).
 4. Slack 커뮤니티 하이라이트: 다룰 만한 게 없으면 억지로 채우지 않음 — 빈 상태로 다음 단계에 넘김 (초안 단계에서 "이번 호는 Tuist Talk 섹션 생략" 처리)
 5. 수집 결과를 다음 단계(`tuist-newsletter-draft`)에 넘기기 좋은 형태로 정리 (항목별 날짜/버전/링크/원문 요약)
 6. **사용자가 "가장 중요한 N개 뽑아줘" 요청 시**: 후보 전체(CLI + 체인지로그 + 블로그 + Slack)를 놓고 뽑을 것 — 체인지로그 항목만 보고 CLI/블로그를 빼먹지 말 것. 선정 기준은 이 뉴스레터 독자(1인/소규모 iOS 엔지니어)에게 실질 영향이 큰 것 우선 — 무료 티어 제한, 기본 동작 변경, 캐시/빌드 체감 성능처럼 직접 와닿는 것이 Gradle/Bazel/Buildkite 같은 엔터프라이즈·타 플랫폼 도구 연동보다 우선순위 높음. 이유를 한 줄로 남길 것
