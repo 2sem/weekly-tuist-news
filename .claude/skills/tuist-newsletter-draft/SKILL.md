@@ -25,6 +25,7 @@ description: Use when writing or revising the Weekly Tuist News draft content (K
 - 항목별: 제목(볼드) + 본문 + 패치노트 링크
 - Pre-release 항목은 소제목이나 본문 첫 문장에 "아직 pre-release/canary 단계" 명시
 - 버전 표기는 하이픈 없는 stable만 "출시됨"으로 서술. Pre-release는 반드시 그렇게 라벨링
+- **CLI 명령/플래그가 나오는 항목은 초안에 넣기 전에 그 명령이 stable 릴리즈에서 실제로 되는지 확인** (`tuist-changelog-collect` 절차 3-1). changelog 날짜만 보고 "바로 쓸 수 있는 기능"이라 쓰지 말 것 — 그 플래그가 canary에만 있으면 독자가 `invalid option` 에러를 만난다. 검증 안 됐으면 명령 예시/코드블록을 넣지 말고 수집 단계로 되돌린다.
 
 ### Tuist Talk (커뮤니티 섹션)
 - 그 호에 다룰 내용이 없으면 섹션 자체를 생략 (빈 placeholder로 남기지 않음)
