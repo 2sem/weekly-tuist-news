@@ -69,7 +69,7 @@ let tuist = Tuist(
 )
 ```
 
-That said, the format itself is still experimental in Xcode. According to the Xcode release notes, projects using `.xcproj` also open in earlier versions of Xcode 27 (before 27.2). The default is still `.pbxproj`, so nothing changes unless you turn the option on.
+That said, the format itself is still experimental in Xcode. The default is still `.pbxproj`, so nothing changes unless you turn the option on. Though we Tuist users don't have to care about this :)
 
 ### Practice
 
