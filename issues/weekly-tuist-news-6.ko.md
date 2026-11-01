@@ -1,0 +1,72 @@
+# Weekly Tuist News #6
+
+> Note: 한국어 초안 승인됨. 아직 Medium에 발행되지 않았습니다.
+
+---
+
+이번 호는 CLI 4.213.0과 4.214.0, 두 번의 릴리즈를 다룹니다. 여러 수정이 있었지만, 일반 사용자에게는 역시 캐시 안정성 수정과 CI 쪽 개선이 체감될 것 같네요. 안전한 CLI 설치 방법도 새로 생겼습니다.
+
+**1. CLI 4.213.0 (10/21): 모듈 캐시 업로드와 생성 안정성**
+
+- 큰 모듈 캐시 blob을 chunk로 쪼개 이어 붙여 올리도록 바뀌었습니다.
+- cache warm 중 원격에서 eviction으로 지워진 모듈 캐시 항목을 다시 올려 둡니다.
+- 생성할 때마다 xcproj의 타겟 식별자가 바뀌던 문제가 수정되어, 식별자가 안정적으로 유지됩니다.
+- 로컬 패키지가 디렉터리 이름이 다른 registry 패키지를 덮어쓸 수 있게 됐습니다.
+- 정적 제품 검사를 링크하는 쪽이 하나뿐일 때는 건너뛰도록 해서 불필요한 검사를 줄였습니다.
+- 옵션에 환경 변수가 지정된 경우 잘못된 값을 거부합니다.
+
+그 밖에 CI에서 Git 이력을 수집하는 기능(TeamCity 포함)과 커버리지 업로드 개선이 있습니다.
+
+원문: [4.213.0 릴리즈 노트](https://github.com/tuist/tuist/releases/tag/4.213.0)
+
+**2. CLI 4.214.0 (10/26): 캐시 수정 다수, 스킴 Build For 설정**
+
+이번 호에서 가장 큰 릴리즈이고 수정이 대부분입니다.
+
+- 새 checkout에서도 manifest 캐시를 재사용합니다(fresh checkout 간 재사용).
+- 로컬 캐시를 여러 번 지운 뒤에도 컴파일 캐시가 복원되도록 고쳐졌습니다.
+- Xcode가 `/private` 아래에서 DerivedData를 찾을 때 쓰는 workspace 경로를 해시하도록 바뀌었습니다.
+- `enableCaching`을 켜면 프로젝트 prefix mapping을 끈 채로 둡니다.
+- 스킴에 타겟별 Build For 설정을 줄 수 있습니다.
+- `--json` 출력과 에러가 조용히 사라지던 문제가 수정됐습니다.
+- 프리뷰에 track과 릴리즈 노트가 추가됐습니다.
+
+커버리지는 `Tuist.swift`의 generation option(`coverage`)과 `TUIST_COVERAGE_ENABLED` 환경 변수로 바이너리 캐시의 커버리지 변종을 고르는 방식이 들어왔습니다. 다만 코드상 `COVERAGE` client feature flag가 켜져 있어야 동작하는 early access 기능이라, 이번 호에서는 사용법을 다루지 않습니다.
+원문: [4.214.0 릴리즈 노트](https://github.com/tuist/tuist/releases/tag/4.214.0)
+
+**3. 서명된 CLI 릴리즈를 mise로 검증해서 설치합니다**
+
+새 CLI 릴리즈(백포트 포함)마다 `packslip.sigstore.json`이 GitHub 릴리즈에 함께 올라갑니다. mise가 이 manifest로 릴리즈 workflow의 identity를 확인하고, 내려받은 아카이브가 서명된 digest와 같은지 검증한 뒤 설치합니다. mise 2026.9.2 이상에서 별도 CLI나 설정 없이 쓸 수 있습니다.
+
+```bash
+mise use packslip:github.com/tuist/tuist@latest
+```
+
+`mise use tuist`는 지금 Aqua 백엔드를 쓰기 때문에 자동으로 Packslip으로 바뀌지 않으며, 검증을 받으려면 `packslip:` 식별자를 써야 합니다. 기존 설치 방법은 그대로 동작하고, 이전에 나온 릴리즈는 소급해서 서명되지 않습니다.
+
+원문: [changelog 2026.10.17](https://tuist.dev/changelog/2026.10.17-signed-cli-releases)
+
+**Tuist Talk: Xcode 버전이 바뀌면 모듈 캐시가 미스 나야 하지 않나요?**
+
+공개 Tuist Slack에서 한 사용자가 Xcode 27.0과 27.1을 함께 쓰는 환경에서, 다른 Xcode로 만든 모듈 캐시 바이너리가 그대로 쓰여 문제가 생긴다고 질문했습니다. Tuist 팀 쪽 답변은 이미 고쳐진 문제이고, 쓰는 CLI 버전에 수정이 없을 수 있다는 것이었습니다. 수정은 Xcode 빌드 정보를 캐시 키에 포함하는 [PR #13666](https://github.com/tuist/tuist/pull/13666)이고, 최신 버전으로 올리거나 4.207.1에 백포트된 것을 쓰라고 안내했습니다.
+
+원인은 컴파일러가 같은 Xcode 릴리즈끼리는 SDK 빌드가 달라도 해시가 같게 나온 것이었습니다. 이 수정은 4.211.0에 들어 있고, 업그레이드한 뒤 기존 캐시 항목은 한 번 미스 납니다(해시 입력이 하나 늘어나기 때문입니다).
+
+Xcode 베타나 마이너 업데이트를 섞어 쓰는 환경이라면 CLI 버전부터 확인해 볼 만합니다. 출처: [Slack 스레드](https://tuist-community.slack.com/archives/C018QG7U7SN/p1792586534629089)
+
+
+**Hands-on notes: mise로 서명된 CLI 설치해 보기**
+
+3번 항목의 명령을 직접 실행해 봤습니다. 버전을 4.214.0으로 고정하면 설치되지 않았고, `@latest`로는 설치됐습니다(이때 설치된 버전은 4.214.1이었습니다). 고정했을 때의 출력은 다음과 같습니다.
+
+```bash
+mise use packslip:github.com/tuist/tuist@4.214.0
+```
+
+```
+✗ packslip:github.com/tuist/tuist@4.214.0  804ms · failed: github.com/tuist/tuist has no release 4.214.0 carrying packslip.sigstore.json; mise installs from a packslip and does not guess at release assets
+✗ installed 0 tools · 1 failed in 815ms
+mise ERROR Failed to install packslip:github.com/tuist/tuist@4.214.0: github.com/tuist/tuist has no release 4.214.0 carrying packslip.sigstore.json; mise installs from a packslip and does not guess at release assets
+```
+
+GitHub에서 확인하면 4.214.0 릴리즈에는 `packslip.sigstore.json`이 올라와 있어서 원인은 아직 모릅니다. 버전을 고정해서 쓰려는 경우에는 이 점을 알고 시도해 보시길 권합니다.
